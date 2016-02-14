@@ -1,4 +1,4 @@
-CFLAGS+=-std=gnu89 -fPIC -MMD -g -Itools/include
+CFLAGS+=-std=gnu89 -fPIC -MMD -g -Iinclude
 LDLIBS+=-Wl,--no-as-needed -ldl
 LDFLAGS+=-fPIC -pie -rdynamic
 
