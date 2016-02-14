@@ -43,7 +43,6 @@ extern struct stats func_stats[];
 struct arguments {
   int verbose;
   int time;
-  int pid;
   int stats;
   int time_spent;
   char *output_file;
@@ -60,7 +59,6 @@ static LIST_HEAD(listhead, handle) handles;
 FILE *fout = NULL;
 int emit_time = 0;
 int emit_time_spent = 0;
-int emit_pid = 0;
 int emit_stats = 0;
 pthread_mutex_t lock;
 void *libopencl_handle = NULL;
@@ -79,7 +77,6 @@ static struct argp_option options[] = {
      "Name of the OpenCL library (default: libOpenCL.so)"},
     {"time", 't', 0, 0, "Prefix each line of the trace with timestamp"},
     {0, 'T', 0, 0, "Show the time spent in system calls"},
-    {"pid", 'p', 0, 0, "Prefix each line of the trace with thread id"},
     {"statistics", 'c', 0, 0,
      "Count time and calls for each func call and report a summary"},
     {0, 'C', 0, 0, "Like -c but also print regular output"},
@@ -103,9 +100,6 @@ static error_t parse_opt(int key, char *arg, struct argp_state *state) {
       break;
     case 'C':
       arguments->stats = 2;
-      break;
-    case 'p':
-      arguments->pid = 1;
       break;
     case 'o':
       arguments->output_file = arg;
@@ -189,10 +183,6 @@ static void __attribute__((constructor)) init(void) {
 
   if (getenv("OCLTRACE_TIME") != NULL) {
     emit_time = 1;
-  }
-
-  if (getenv("OCLTRACE_PID") != NULL) {
-    emit_pid = 1;
   }
 
   if (getenv("OCLTRACE_TIME_SPENT") != NULL) {
@@ -376,7 +366,6 @@ int main(int argc, char **argv) {
   if (arguments.verbose) setenv("OCLTRACE_VERBOSE", "1", 1);
   if (arguments.time) setenv("OCLTRACE_TIME", "1", 1);
   if (arguments.time_spent) setenv("OCLTRACE_TIME_SPENT", "1", 1);
-  if (arguments.pid) setenv("OCLTRACE_PID", "1", 1);
   if (arguments.stats == 1) setenv("OCLTRACE_STATS", "1", 1);
   if (arguments.stats == 2) setenv("OCLTRACE_STATS", "2", 1);
   if (arguments.library) setenv("OCLTRACE_LIBRARY", arguments.library, 1);

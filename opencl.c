@@ -30,7 +30,6 @@
 #include "opencl.h"
 
 extern FILE *fout;
-extern int emit_pid;
 extern int emit_time;
 extern int emit_time_spent;
 extern int emit_stats;
@@ -420,9 +419,6 @@ inline double timetodouble(const struct timespec a) {
 }
 
 inline void emit_open(struct emit *e, int name) {
-  if (emit_pid) {
-    fprintf(fout, "[tid %d] ", syscall(SYS_gettid));
-  }
   if (emit_time) {
     struct timespec t;
     clock_gettime(CLOCK_REALTIME, &t);
