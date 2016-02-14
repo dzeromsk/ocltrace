@@ -8,8 +8,7 @@ OpenCL call tracer -- like strace but for OpenCL API
   -c, --statistics           Count time and calls for each func call and report
                              a summary
   -C                         Like -c but also print regular output
-  -l, --library=LIBRARY      Name of the OpenCL library (default:
-                             libOpenCL.so)
+  -l, --library=LIBRARY      Name of the OpenCL library
   -o, --output=FILE          Output to FILE instead of standard output
   -t, --time                 Prefix each line of the trace with timestamp
   -T                         Show the time spent in system calls

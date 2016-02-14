@@ -73,8 +73,7 @@ static char args_doc[] = "<PROG> [<ARGS>]";
 static struct argp_option options[] = {
     {"output", 'o', "FILE", 0, "Output to FILE instead of standard output"},
     {"verbose", 'v', 0, 0, "Produce verbose output"},
-    {"library", 'l', "LIBRARY", 0,
-     "Name of the OpenCL library (default: libOpenCL.so)"},
+    {"library", 'l', "LIBRARY", 0, "Name of the OpenCL library"},
     {"time", 't', 0, 0, "Prefix each line of the trace with timestamp"},
     {0, 'T', 0, 0, "Show the time spent in system calls"},
     {"statistics", 'c', 0, 0,
